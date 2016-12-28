@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using funcdump;
 
 namespace funcdump
@@ -14,7 +15,20 @@ namespace funcdump
 
         static void Main(string[] args)
         {
-            Parser.Start(filepath(args)); //Start parser
+            Parser.Start("D:\\Projects\\funcdump\\funcdump\\Parser.cs"/*filepath(args)*/); //Start parser
+            string[] funcList = Parser.FunctionList();
+            string[] pureFuncList = Parser.Purifier(Parser.FunctionList());
+            Console.WriteLine("FUNCLIST:");
+            foreach(string func in funcList)
+            {
+                Console.WriteLine(func);
+            }
+            Console.WriteLine("PUREFUNCLIST:");
+            foreach (string func in funcList)
+            {
+                Console.WriteLine(func);
+            }
+            Console.ReadKey();
         }
 
         static string filepath(string[] args)

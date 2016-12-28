@@ -1,1 +1,6 @@
 D:\Projects\funcdump\funcdump\bin\Debug\funcdump.exe.config
+D:\Projects\funcdump\funcdump\bin\Debug\funcdump.exe
+D:\Projects\funcdump\funcdump\bin\Debug\funcdump.pdb
+D:\Projects\funcdump\funcdump\obj\Debug\funcdump.csprojResolveAssemblyReference.cache
+D:\Projects\funcdump\funcdump\obj\Debug\funcdump.exe
+D:\Projects\funcdump\funcdump\obj\Debug\funcdump.pdb
