@@ -15,7 +15,7 @@ namespace funcdump
 
         static void Main(string[] args)
         {
-            Parser.Start("D:\\Projects\\funcdump\\funcdump\\Parser.cs"/*filepath(args)*/); //Start parser
+            Parser.Start(filepath(args)); //Start parser
             string[] funcList = Parser.FunctionList();
             Console.WriteLine("Functions:");
             int i = 1;
