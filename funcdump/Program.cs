@@ -17,18 +17,81 @@ namespace funcdump
         {
             Parser.Start("D:\\Projects\\funcdump\\funcdump\\Parser.cs"/*filepath(args)*/); //Start parser
             string[] funcList = Parser.FunctionList();
-            string[] pureFuncList = Parser.Purifier(Parser.FunctionList());
-            Console.WriteLine("FUNCLIST:");
+            Console.WriteLine("Functions:");
+            int i = 1;
             foreach(string func in funcList)
             {
-                Console.WriteLine(func);
+                Console.WriteLine("[" + i.ToString() + "] " +func);
+                i++;
             }
-            Console.WriteLine("PUREFUNCLIST:");
-            foreach (string func in funcList)
+            while (true)
             {
-                Console.WriteLine(func);
+                Console.Write("Search: ");
+                var searchTerms = Console.ReadLine();
+                if(searchTerms == "[:!/--]")
+                {
+                    break;
+                }
+                var searchResults = arrContains(funcList, searchTerms);
+                Console.Clear();
+                Console.WriteLine("Results:");
+                i = 1;
+                foreach (string func in searchResults)
+                {
+                    Console.WriteLine("[" + (whichLine(func, funcList) + 1).ToString() + "] " + func);
+                    i++;
+                }
+                Console.WriteLine("Type [:!/--] (brackets included) to exit search and dump functions.");
+            }
+            Console.Write("Enter line ID: ");
+            var id = int.Parse(Console.ReadLine());
+            var specifiedLine = funcList[id - 1];
+            Console.WriteLine("[DEBUG] You specified this line: " + specifiedLine);
+            var dumped_code = Parser.dump(specifiedLine);
+            Console.Clear();
+            foreach (string code in dumped_code)
+            {
+                Console.WriteLine(code);
             }
             Console.ReadKey();
+
+        }
+
+        static int whichLine(string line, string[] array)
+        {
+            for (int i = 0; i <= array.Length - 1; i++)
+            {
+                if (array[i] == line)
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
+        static string[] arrContains(string[] array, string containment)
+        {
+            List<string> results = new List<string>();
+            foreach (string line in array)
+            {
+                if (Contains(line, containment))
+                {
+                    results.Add(line);
+                }
+            }
+            return results.ToArray();
+        }
+
+        static bool Contains(string container, string containment)
+        {
+            if (container.IndexOf(containment) >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         static string filepath(string[] args)
